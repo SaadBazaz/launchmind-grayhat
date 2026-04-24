@@ -11,8 +11,9 @@
 
 | Concern | Decision |
 |---|---|
-| Agent framework | CrewAI |
-| LLM provider | Anthropic Claude (all agents, single API key) |
+| Agent framework | Plain Python classes (`BaseAgent`) — no CrewAI needed |
+| LLM provider | Ollama local (`qwen2.5:1.5b`) for dev; swap via `LLM_PROVIDER` env var |
+| LLM abstraction | `agents/llm_provider.py` — supports `ollama`, `gemini`, `anthropic`, `deepseek` |
 | Message bus | Shared Python `dict` in `message_bus.py` |
 | GitHub integration | Direct `requests` calls to `api.github.com` |
 | Slack integration | `requests` to `chat.postMessage`, Block Kit formatting |
@@ -41,6 +42,8 @@ The CEO agent must perform LLM-based review of at least one sub-agent output and
 
 ```
 launchmind-grayhat/
+├── docs/
+│   ├── ...
 ├── agents/
 │   ├── ceo_agent.py
 │   ├── product_agent.py
@@ -55,3 +58,22 @@ launchmind-grayhat/
 ├── .gitignore
 └── README.md
 ```
+
+## Startup idea
+
+The idea is to build "melon"; A beautiful, open-source voice assistant focused on preserving your voice data. Works on all major desktop OS. Melon is an AI transcribing tool built in cross-platform technologies (Electron) which can download local transcription models, and records a user's voice and turns it into a text which can be copied or pasted into the clipboard.
+
+
+## Technical Approach
+
+- Use the latest Python compatible with CrewAI
+- Create a virtual env for Python, boot in that and work in it
+- Start with the simplest agent with the least dependencies
+- Try using good OOP principles for the Agents (maybe make an Agent base class)
+- For each agent:
+  - Implement it in CrewAI independently
+    - Make sure to create a test file for it, to independently test its functionalities
+  - If it requires any env variables, prompt the developer for it
+  - Once done, provide a command to test it (human-in-the-loop)
+- Once the first agent is done, implement the message bus so it can communicate with the second agent
+- Keep updating GENERAL_APPROACH.md with any new standards/techniques you build along the way
