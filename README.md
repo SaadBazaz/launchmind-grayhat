@@ -1,6 +1,6 @@
 # LaunchMind
 
-> **Academic Disclaimer:** This project was built as a group assignment for the *Agentic AI / Multi-Agent Systems* course at **FAST National University of Computer & Emerging Sciences, Islamabad**, under **Dr. Usama Imtiaz**. It is submitted in partial fulfilment of coursework requirements.
+> This project was built as a group assignment for the *Agentic AI / Multi-Agent Systems* course at **FAST National University of Computer & Emerging Sciences, Islamabad**, under **Dr. Usama Imtiaz**. It is submitted in partial fulfilment of coursework requirements.
 
 LaunchMind is a Multi-Agent System (MAS) that autonomously runs a micro-startup — from a raw idea all the way to a GitHub pull request, a Slack launch announcement, and a cold outreach email — without any human doing it manually.
 
@@ -78,13 +78,17 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Install and start Ollama
+### 2. (optional) Run LLM locally
+
+I used Ollama with Qwen2.5:1.5b for local testing:
 
 ```bash
 # Install from https://ollama.com
 ollama pull qwen2.5:1.5b
 ollama serve
 ```
+
+However, you're free to configure another LLM (see the [.env.example](./.env.example)) for more LLM options.
 
 ### 3. Configure environment variables
 
